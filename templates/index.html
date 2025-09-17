@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="navbar">
-            
-        </div>
-        <div class="body">
+{% extends 'base.html' %}
 
-        </div>
-        <div class="footer">
+{% block content %}
+    <section class="hero">
+        <h1>Bem-vindo ao <span>KONG LABS</span></h1>
+        <p>Gerencie seus produtos com eficiência e estilo.</p>
+        <a href="{{ url_for('cadastro_usuario') }}" class="btn">Cadastrar Produto</a>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/inicial.css') }}">
+    </section>
 
+    <section class="features">
+        <div class="feature-box">
+            <h2>💪 Cadastro Rápido</h2>
+            <p>Adicione produtos com poucos cliques e sem complicação.</p>
         </div>
-    </div>
-    
-</body>
-</html>
+        <div class="feature-box">
+            <h2>📦 Gerenciamento</h2>
+            <p>Visualize, edite e organize seus produtos com facilidade.</p>
+        </div>
+        <div class="feature-box">
+            <h2>🔒 Segurança</h2>
+            <p>Seus dados protegidos com tecnologia de ponta.</p>
+        </div>
+    </section>
+{% endblock %}
