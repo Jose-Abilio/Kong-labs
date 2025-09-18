@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Kong Labs{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 style="text-align: center; margin-bottom: 2rem; color: #DC143C; font-family: 'Bebas Neue', cursive; font-size: 2rem;">
+        Login
+    </h2>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+        </div>
+        
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <button type="submit" class="btn">Entrar</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary" style="margin-left: 1rem;">Voltar</a>
+        </div>
+    </form>
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+    <p style="color: #cccccc;">
+        Não possui uma conta? 
+        <a href="{{ url_for('cadastro_usuario') }}" style="color: #DC143C; text-decoration: none; font-weight: bold;">
+            Cadastre-se aqui
+        </a>
+    </p>
+</div>
+{% endblock %}

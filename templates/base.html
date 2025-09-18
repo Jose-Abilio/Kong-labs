@@ -2,21 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kong Labs{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">KONG LABS</div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <a href="{{ url_for('index') }}" class="brand" aria-label="Kong Labs Home">
+            <img src="{{ url_for('static', filename='img/kong-labs-logo.png') }}" alt="Kong Labs" class="brand-image" loading="eager">
+            <span class="brand-text">KONG LABS</span>
+        </a>
         <div>
-            <a href="{{ url_for('cadastro_usuario') }}">Cadastro</a>
-            <a href="{{ url_for('login') }}">Login</a>
+            {% if session.user_id %}
+                <a href="{{ url_for('produtos') }}">Produtos</a>
+                <a href="{{ url_for('criar_produto') }}">Novo Produto</a>
+                <span style="color: #DC143C;">Olá, {{ session.user_nome }}!</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('cadastro_usuario') }}">Cadastro</a>
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
         </div>
     </nav>
 
     <div class="container">
+        <!-- Mensagens Flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
         {% block content %}
        
         {% endblock %}

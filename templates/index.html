@@ -2,9 +2,10 @@
 
 {% block content %}
     <section class="hero">
+        <img src="{{ url_for('static', filename='img/kong-labs-logo.png') }}" alt="Logo Kong Labs" class="hero-logo">
         <h1>Bem-vindo ao <span>KONG LABS</span></h1>
         <p>Gerencie seus produtos com eficiência e estilo.</p>
-        <a href="{{ url_for('cadastro_usuario') }}" class="btn">Cadastrar Produto</a>
+        <a href="{{ url_for('cadastro_usuario') }}" class="btn">Começar Agora</a>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/inicial.css') }}">
     </section>
 
@@ -23,3 +24,4 @@
         </div>
     </section>
 {% endblock %}
+
