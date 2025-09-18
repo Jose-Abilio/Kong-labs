@@ -76,8 +76,6 @@ Kong-labs/
 
 ## Logo e Tema
 - Cores predominantes: preto e vermelho (ver `static/css/*.css`).
-- Adicione a logo da Kong Labs em `static/img/kong-labs-logo.png`.
-  - Caso o arquivo não exista, a home exibirá um espaço reservado.
 
 ## Notas
 - Senhas são armazenadas com hash simples via Werkzeug (sem criptografia avançada; uso educativo).
