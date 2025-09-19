@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <a href="{{ url_for('index') }}" class="brand" aria-label="Kong Labs Home">
-            <img src="{{ url_for('static', filename='img/kong-labs-logo.png') }}" alt="Kong Labs" class="brand-image" loading="eager">
-            <span class="brand-text">KONG LABS</span>
+    <nav class="navbar" role="navigation" >
+        <a href="{{ url_for('index') }}" class="logo" aria-label="Kong Labs Home">
+            <img src="{{ url_for('static', filename='img/kong-labs-logo.png') }}" alt="Kong Labs" class="logo-image" >
+            <span class="logo-text">KONG LABS</span>
         </a>
         <div>
             {% if session.user_id %}

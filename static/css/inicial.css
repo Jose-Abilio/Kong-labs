@@ -1,10 +1,12 @@
 /* Estilos específicos para a página inicial */
 
+
+
 .hero {
     text-align: center;
     padding: 3.5rem 1rem;
     background: #151515; /* cor sólida, sem degradê */
-    border: 1px solid var(--line);
+    border: 1px solid #2a2a2a;
     border-radius: 16px;
     margin: 1.75rem 0;
     box-shadow: 0 10px 24px rgba(0,0,0,.35);
@@ -18,7 +20,7 @@
 }
 
 .hero h1 span {
-    color: var(--brand);
+    color: #c1121f;
     font-family: 'Bebas Neue', cursive;
     text-shadow: 0 1px 8px rgba(193, 18, 31, 0.35);
 }
@@ -26,7 +28,7 @@
 .hero p {
     font-size: 1.1rem;
     margin-bottom: 1.6rem;
-    color: var(--muted);
+    color: #cfcfcf;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
@@ -40,13 +42,13 @@
 }
 
 .feature-box {
-    background: var(--bg-card);
+    background: #1b1b1b;
     padding: 1.6rem;
     border-radius: 14px;
     text-align: center;
     transition: transform .18s ease, box-shadow .25s ease, border-color .2s ease;
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
 }
 
 .feature-box:hover {
@@ -58,12 +60,12 @@
 .feature-box h2 {
     font-size: 1.25rem;
     margin-bottom: .6rem;
-    color: var(--brand);
+    color: #c1121f;
     text-shadow: none;
 }
 
 .feature-box p {
-    color: var(--muted);
+    color: #cfcfcf;
     line-height: 1.6;
 }
 
