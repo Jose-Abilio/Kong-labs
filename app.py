@@ -2,12 +2,18 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from models import db, Usuario, Produto
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from infra.repository.produts_repo import ProdutosRepository
+from infra.repository.users_repo import UsersRepository
+
+prod_repo = ProdutosRepository()
+user_repo = UsersRepository() 
+
 app = Flask(__name__)
 
 # Configurações
 app.config['SECRET_KEY'] = 'kong-labs-secret-key-2024'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///kong_labs.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///kong_labs.db'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializar extensões
 db.init_app(app)
