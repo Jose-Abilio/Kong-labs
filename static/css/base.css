@@ -1,15 +1,4 @@
-/* Reset e configurações básicas */
-:root {
-    --bg-dark: #121212;
-    --bg-card: #1b1b1b;
-    --text: #f3f3f3;
-    --muted: #cfcfcf;
-    --line: #2a2a2a;
-    --brand: #c1121f; /* vermelho principal */
-    --brand-dark: #8B0000;
-    --brand-soft: #e01d2d;
-    --shadow: 0 6px 18px rgba(0,0,0,.35);
-}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,8 +7,8 @@
 
 body {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background: var(--bg-dark);
-    color: var(--text);
+    background:  #121212;
+    color:  #f3f3f3;
     min-height: 100vh;
     line-height: 1.6;
 }
@@ -40,23 +29,23 @@ body {
     z-index: 1000;
 }
 
-.brand {
+.logo {
     display: inline-flex;
     align-items: center;
     gap: .6rem;
     text-decoration: none;
 }
-.brand-image {
+.logo-image {
     width: 34px;
     height: 34px;
     object-fit: contain;
     filter: drop-shadow(0 2px 8px rgba(139,0,0,.35));
 }
-.brand-text {
+.logo-text {
     font-family: 'Bebas Neue', system-ui, sans-serif;
     letter-spacing: .5px;
     font-size: 1.55rem;
-    color: var(--text);
+    color: #f3f3f3;
 }
 
 .navbar div:last-child {
@@ -65,9 +54,9 @@ body {
 }
 
 .navbar a {
-    color: var(--text);
+    color: #f3f3f3;
     text-decoration: none;
-    padding: .5rem .8rem;
+    padding: .1rem .8rem;
     border-radius: 8px;
     transition: background-color .2s ease, color .2s ease, transform .15s ease;
     font-weight: 600;
@@ -86,9 +75,9 @@ body {
 }
 
 /* Botões */
-.btn {
+.botao {
     display: inline-block;
-    background: var(--brand);
+    background: #c1121f;
     color: #fff;
     padding: 12px 22px;
     text-decoration: none;
@@ -103,35 +92,35 @@ body {
     box-shadow: 0 6px 16px rgba(193, 18, 31, .25);
 }
 
-.btn:hover {
-    background: var(--brand-soft);
+.botao:hover {
+    background: #e01d2d;
     transform: translateY(-1px);
     box-shadow: 0 10px 22px rgba(193, 18, 31, .28);
 }
 
-.btn-secondary {
+.botao-secondary {
     background: #2b2b2b;
 }
 
-.btn-secondary:hover {
+.botao-secondary:hover {
     background: #3a3a3a;
 }
 
-.btn-danger {
-    background: var(--brand-dark);
+.botao-danger {
+    background: #8B0000;
 }
 
-.btn-danger:hover {
+.botao-danger:hover {
     background: #a41414;
 }
 
 /* Formulários */
 .form-container {
-    background: var(--bg-card);
+    background: #121212;
     padding: 1.75rem;
     border-radius: 14px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    border: 1px solid #2a2a2a;
     max-width: 500px;
     margin: 2rem auto;
 }
@@ -143,7 +132,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text);
+    color: #f3f3f3;
     font-weight: 600;
 }
 
@@ -151,25 +140,15 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid var(--line);
+    border: 1px solid #2a2a2a;
     border-radius: 10px;
     background: #171717;
-    color: var(--text);
+    color: #f3f3f3;
     font-size: 1rem;
     transition: border-color .2s ease, box-shadow .2s ease;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: rgba(193, 18, 31, .65);
-    box-shadow: 0 0 0 4px rgba(193, 18, 31, .15);
-}
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #9c9c9c;
-}
 
 /* Mensagens flash */
 .flash-messages {
@@ -197,12 +176,12 @@ body {
 
 /* Tabelas */
 .table-container {
-    background: var(--bg-card);
+    background: #1b1b1b;
     border-radius: 14px;
     padding: 1.5rem;
     margin: 2rem 0;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    border: 1px solid #2a2a2a;
 }
 
 table {
@@ -214,14 +193,14 @@ table {
 th, td {
     padding: .9rem 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid #2a2a2a;
 }
 
 th {
     background: #1d1d1d;
-    color: var(--text);
+    color: #f3f3f3;
     font-weight: 700;
-    border-bottom: 2px solid var(--brand);
+    border-bottom: 2px solid #c1121f;
 }
 
 tr:hover {
