@@ -2,14 +2,19 @@ from infra.configs.connection import DBConnectionHandler
 from infra.entities.produtos import Produtos
 
 class ProdutosRepository:
-    def select(self):
+    def select(self, id):
+        with DBConnectionHandler() as db:
+            data = db.session.query(Produtos).filter(Produtos.prod_id == id).first()
+            return data
+        
+    def select_all(self):
         with DBConnectionHandler() as db:
             data = db.session.query(Produtos).all()
-            return data 
+            return data
         
-    def insert(self, id, nome, preco, descricao):
+    def insert(self, nome, preco, descricao):
         with DBConnectionHandler() as db:
-            data_insert = Produtos(prod_id=id, prod_nome=nome, prod_preco=preco, prod_descricao=descricao)
+            data_insert = Produtos(prod_nome=nome, prod_preco=preco, prod_descricao=descricao)
             db.session.add(data_insert)
             db.session.commit()                                    
 

@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from models import db, Usuario, Produto
+#from models import db, Usuario, Produto
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from infra.repository.produts_repo import ProdutosRepository
 from infra.repository.users_repo import UsersRepository
+from infra.configs.connection import DBConnectionHandler
 
 prod_repo = ProdutosRepository()
 user_repo = UsersRepository() 
@@ -16,11 +17,11 @@ app.config['SECRET_KEY'] = 'kong-labs-secret-key-2024'
 #app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializar extensões
-db.init_app(app)
+#db.init_app(app)
 
 # Criar tabelas
-with app.app_context():
-    db.create_all()
+#with app.app_context():
+#    db.create_all()
 
 @app.route('/')
 def index():
@@ -34,18 +35,19 @@ def cadastro_usuario():
         senha = request.form['senha']
         
         # Verificar se o email já existe
-        usuario_existente = Usuario.query.filter_by(email=email).first()
+        usuario_existente = user_repo.select(email)
         if usuario_existente:
             flash('Email já cadastrado!', 'error')
             return render_template('cadastro_usuario.html')
         
         # Criar novo usuário
         senha_hash = generate_password_hash(senha)
-        novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
+        #novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
         
         try:
-            db.session.add(novo_usuario)
-            db.session.commit()
+            #db.session.add(novo_usuario)
+            #db.session.commit()
+            user_repo.insert(nome, email, senha_hash)
             flash('Usuário cadastrado com sucesso!', 'success')
             return redirect(url_for('login'))
         except:
@@ -60,11 +62,11 @@ def login():
         email = request.form['email']
         senha = request.form['senha']
         
-        usuario = Usuario.query.filter_by(email=email).first()
+        usuario = user_repo.select(email)
         
-        if usuario and check_password_hash(usuario.senha, senha):
-            session['user_id'] = usuario.id
-            session['user_nome'] = usuario.nome
+        if usuario and check_password_hash(usuario.user_senha, senha):
+            session['user_id'] = usuario.user_id
+            session['user_nome'] = usuario.user_nome
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('produtos'))
         else:
@@ -84,7 +86,7 @@ def produtos():
         flash('Você precisa fazer login primeiro!', 'error')
         return redirect(url_for('login'))
     
-    produtos = Produto.query.all()
+    produtos = prod_repo.select_all()
     return render_template('produtos.html', produtos=produtos)
 
 @app.route('/criar_produto', methods=['GET', 'POST'])
@@ -98,11 +100,12 @@ def criar_produto():
         preco = float(request.form['preco'])
         descricao = request.form['descricao']
         
-        novo_produto = Produto(nome=nome, preco=preco, descricao=descricao)
+        #novo_produto = Produto(nome=nome, preco=preco, descricao=descricao)
         
         try:
-            db.session.add(novo_produto)
-            db.session.commit()
+            #db.session.add(novo_produto)
+            #db.session.commit()
+            prod_repo.insert(nome, preco, descricao)
             flash('Produto criado com sucesso!', 'success')
             return redirect(url_for('produtos'))
         except:
@@ -116,19 +119,19 @@ def editar_produto(id):
         flash('Você precisa fazer login primeiro!', 'error')
         return redirect(url_for('login'))
     
-    produto = Produto.query.get_or_404(id)
+    produto = prod_repo.select(id)
     
     if request.method == 'POST':
-        produto.nome = request.form['nome']
-        produto.preco = float(request.form['preco'])
-        produto.descricao = request.form['descricao']
-        
-        try:
-            db.session.commit()
-            flash('Produto atualizado com sucesso!', 'success')
-            return redirect(url_for('produtos'))
-        except:
-            flash('Erro ao atualizar produto!', 'error')
+        if produto:
+            #produto.prod_nome = request.form['nome']
+            #produto.prod_preco = float(request.form['preco'])
+            #produto.prod_descricao = request.form['descricao']
+            try:
+                prod_repo.update(id=id, nome=request.form['nome'], preco=request.form['preco'], descricao=request.form['descricao'])
+                flash('Produto atualizado com sucesso!', 'success')
+                return redirect(url_for('produtos'))
+            except:
+                flash('Erro ao atualizar produto!', 'error')
     
     return render_template('editar_produto.html', produto=produto)
 
@@ -138,16 +141,20 @@ def excluir_produto(id):
         flash('Você precisa fazer login primeiro!', 'error')
         return redirect(url_for('login'))
     
-    produto = Produto.query.get_or_404(id)
+    produto = prod_repo.select(id)
     
-    try:
-        db.session.delete(produto)
-        db.session.commit()
-        flash('Produto excluído com sucesso!', 'success')
-    except:
-        flash('Erro ao excluir produto!', 'error')
+    if produto:
+        try:
+            #db.session.delete(produto)
+            #db.session.commit()
+            prod_repo.delete(id)
+            flash('Produto excluído com sucesso!', 'success')
+        except:
+            flash('Erro ao excluir produto!', 'error')
     
     return redirect(url_for('produtos'))
 
 if __name__ == '__main__':
+    db_conn = DBConnectionHandler()
+    db_conn.create_db_tables()
     app.run(debug=True)
