@@ -26,16 +26,16 @@
             <tbody>
                 {% for produto in produtos %}
                 <tr>
-                    <td>{{ produto.id }}</td>
-                    <td>{{ produto.nome }}</td>
-                    <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
-                    <td>{{ produto.descricao[:50] }}{% if produto.descricao|length > 50 %}...{% endif %}</td>
-                    <td>{{ produto.data_criacao.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td>{{ produto.prod_id }}</td>
+                    <td>{{ produto.prod_nome }}</td>
+                    <td>R$ {{ "%.2f"|format(produto.prod_preco) }}</td>
+                    <td>{{ produto.prod_descricao[:50] }}{% if produto.prod_descricao|length > 50 %}...{% endif %}</td>
+                    <td>{{ produto.prod_data_criacao.strftime('%d/%m/%Y %H:%M') }}</td>
                     <td>
-                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="botao botao-secondary" style="margin-right: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <a href="{{ url_for('editar_produto', id=produto.prod_id) }}" class="botao botao-secondary" style="margin-right: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
                             Editar
                         </a>
-                        <a href="{{ url_for('excluir_produto', id=produto.id) }}" 
+                        <a href="{{ url_for('excluir_produto', id=produto.prod_id) }}" 
                            class="botao botao-danger" 
                            style="padding: 0.5rem 1rem; font-size: 0.9rem;"
                            onclick="return confirm('Tem certeza que deseja excluir este produto?')">
