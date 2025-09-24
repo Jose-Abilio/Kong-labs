@@ -37,7 +37,6 @@ def cadastro_usuario():
             user_repo.insert(nome, email, senha_hash)
             flash('Usuário cadastrado com sucesso!', 'success')
             return redirect(url_for('login'))
-        
         except:
             flash('Erro ao cadastrar usuário!', 'error')
             return render_template('cadastro_usuario.html')
@@ -92,7 +91,6 @@ def criar_produto():
             prod_repo.insert(nome, preco, descricao)
             flash('Produto criado com sucesso!', 'success')
             return redirect(url_for('produtos'))
-        
         except:
             flash('Erro ao criar produto!', 'error')
     
