@@ -30,8 +30,7 @@ Ao iniciar, o banco SQLite `kong_labs.db` será criado automaticamente na raiz d
 ## Estrutura de pastas
 ```
 Kong-labs/
-├─ app.py                   # App Flask + rotas + sessão + CRUD
-├─ models.py                # Modelos SQLAlchemy (Usuario, Produto)
+├─ app.py                   # App Flask + rotas + sessão + CRUD                
 ├─ templates/               # Templates Jinja2
 │  ├─ base.html
 │  ├─ index.html
@@ -45,14 +44,25 @@ Kong-labs/
 │  │  ├─ base.css           # Tema preto/vermelho
 │  │  └─ inicial.css        # Estilos da home
 │  └─ img/
+├─ infra/
+│  ├─ configs
+│     ├─ base.py
+│     └─ connection.py
+│  ├─ entities              # Modelos SQLAlchemy (Usuario, Produto)
+│     ├─ produtos.py
+│     └─ usuarios.py
+│  └─ repository
+│     ├─ produts_repo.py
+│     └─ users_repo.py
+├─ Kong_labs.db
 ├─ requirements.txt
 └─ README.md
 ```
 
 ## Banco de Dados
 - SQLite via SQLAlchemy.
-- Models em `models.py`:
-  - `Usuario`: id, nome, email (único), senha (hash), data_criacao
+- Models em `infra/entities`:
+  - `Usuario`: id, nome, email (único), senha (hash)
   - `Produto`: id, nome, preco (float), descricao, data_criacao
 
 ## Funcionalidades
@@ -82,7 +92,7 @@ Kong-labs/
 - Sem relacionamentos entre usuários e produtos (independentes), conforme requisitos.
 
 ## Equipe
-- Lucas Nobrega
+- Lucas Nóbrega
 - José Abílio
 - Eduardo Vinícius
 - Maria Luiza

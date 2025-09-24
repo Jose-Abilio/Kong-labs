@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-#from models import db, Usuario, Produto
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from infra.repository.produts_repo import ProdutosRepository
@@ -13,15 +12,6 @@ app = Flask(__name__)
 
 # Configurações
 app.config['SECRET_KEY'] = 'kong-labs-secret-key-2024'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///kong_labs.db'
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Inicializar extensões
-#db.init_app(app)
-
-# Criar tabelas
-#with app.app_context():
-#    db.create_all()
 
 @app.route('/')
 def index():
@@ -42,11 +32,8 @@ def cadastro_usuario():
         
         # Criar novo usuário
         senha_hash = generate_password_hash(senha)
-        #novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
         
         try:
-            #db.session.add(novo_usuario)
-            #db.session.commit()
             user_repo.insert(nome, email, senha_hash)
             flash('Usuário cadastrado com sucesso!', 'success')
             return redirect(url_for('login'))
@@ -99,12 +86,8 @@ def criar_produto():
         nome = request.form['nome']
         preco = float(request.form['preco'])
         descricao = request.form['descricao']
-        
-        #novo_produto = Produto(nome=nome, preco=preco, descricao=descricao)
-        
+                
         try:
-            #db.session.add(novo_produto)
-            #db.session.commit()
             prod_repo.insert(nome, preco, descricao)
             flash('Produto criado com sucesso!', 'success')
             return redirect(url_for('produtos'))
@@ -123,13 +106,11 @@ def editar_produto(id):
     
     if request.method == 'POST':
         if produto:
-            #produto.prod_nome = request.form['nome']
-            #produto.prod_preco = float(request.form['preco'])
-            #produto.prod_descricao = request.form['descricao']
             try:
                 prod_repo.update(id=id, nome=request.form['nome'], preco=request.form['preco'], descricao=request.form['descricao'])
                 flash('Produto atualizado com sucesso!', 'success')
                 return redirect(url_for('produtos'))
+            
             except:
                 flash('Erro ao atualizar produto!', 'error')
     
@@ -145,10 +126,9 @@ def excluir_produto(id):
     
     if produto:
         try:
-            #db.session.delete(produto)
-            #db.session.commit()
             prod_repo.delete(id)
             flash('Produto excluído com sucesso!', 'success')
+
         except:
             flash('Erro ao excluir produto!', 'error')
     
